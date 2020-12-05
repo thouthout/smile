@@ -19,4 +19,14 @@ public class ListNode {
         this.val = val;
         this.next = next;
     }
+
+    public int length(){
+        ListNode head = this;
+        int length = 0;
+        while (head.next != null) {
+            length ++;
+            head = head.next;
+        }
+        return length;
+    }
 }
