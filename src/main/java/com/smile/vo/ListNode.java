@@ -23,10 +23,19 @@ public class ListNode {
     public int length(){
         ListNode head = this;
         int length = 0;
-        while (head.next != null) {
+        while (head != null) {
             length ++;
             head = head.next;
         }
         return length;
+    }
+
+    public void printNode(){
+        ListNode head = this;
+        while (head != null){
+            System.out.print(head.val + "->");
+            head = head.next;
+        }
+        System.out.println("=====");
     }
 }

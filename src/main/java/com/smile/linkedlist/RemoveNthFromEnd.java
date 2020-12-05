@@ -22,7 +22,7 @@ import com.smile.vo.ListNode;
  */
 public class RemoveNthFromEnd {
 
-    public ListNode removeNthFromEnd(ListNode head, int n) {
+    public static ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode prehead = new ListNode(-1);
         ListNode prev = prehead;
         prev.next = head;
@@ -31,7 +31,7 @@ public class RemoveNthFromEnd {
             return head;
         }
         int currentNode = 1;
-        int removeNode = length - n + 1;
+        int removeNode = length - n;
         if(removeNode == 1) {
             return head.next;
         }
@@ -41,6 +41,23 @@ public class RemoveNthFromEnd {
         }
         head.next = head.next.next;
         return prev.next;
+    }
+
+    public static void main(String[] args) {
+        ListNode listNode1 = new ListNode(1);
+        ListNode listNode2 = new ListNode(2);
+        ListNode listNode3 = new ListNode(3);
+        ListNode listNode4 = new ListNode(4);
+        ListNode listNode5 = new ListNode(5);
+        listNode1.next = listNode2;
+        listNode2.next = listNode3;
+        listNode3.next = listNode4;
+        listNode4.next = listNode5;
+        listNode1.printNode();
+        ListNode listNode = removeNthFromEnd(listNode1, 1);
+        listNode.printNode();
+
+
     }
 
 
