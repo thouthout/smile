@@ -2,7 +2,6 @@ package com.smile.vo;
 
 import lombok.Data;
 
-@Data
 public class ListNode {
 
     public int val;
@@ -12,6 +11,14 @@ public class ListNode {
     public ListNode(){}
 
     public ListNode(int val){
+        this.val = val;
+    }
+
+    public int getVal() {
+        return val;
+    }
+
+    public void setVal(int val) {
         this.val = val;
     }
 
