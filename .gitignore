@@ -28,6 +28,7 @@ target/
 build/
 smile/build
 .gradle/
+.gradle/6.1.1/**
 
 ### VS Code ###
 .vscode/
