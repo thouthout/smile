@@ -1,7 +1,5 @@
 package com.smile.vo;
 
-import lombok.Data;
-
 public class ListNode {
 
     public int val;
