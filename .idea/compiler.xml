@@ -2,13 +2,14 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$PROJECT_DIR$/../../../tools/gradle_resp/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.2/524e0a697e9d62950b2f763d88d35cd8dc82a9a1/lombok-1.18.2.jar" />
         </processorPath>
-        <module name="smile.test" />
         <module name="smile.main" />
+        <module name="smile.test" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11" />

@@ -93,4 +93,19 @@ public class LongestPrefix {
         }
         return -1;
     }
+
+    /**
+     * 最长回文字符串
+     * @param s
+     * @return
+     */
+    public String longestPalindrome(String s) {
+        if(Objects.isNull(s) || "".equals(s.trim())){
+            return "";
+        }
+        String longestStr = "";
+
+
+        return s;
+    }
 }
