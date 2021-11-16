@@ -1,5 +1,9 @@
 
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -42,7 +46,7 @@ public class ConsistentHashAlgorithm {
         SortedMap<Long, String> virtualTableNodes = new TreeMap<>();
         int i = 0;
         for (String tableNode : tableNodes) {
-            for (int j = 1; j <= VIRTUAL_NODES; j++) {
+            for (int j = 0; j < VIRTUAL_NODES; j++) {
                 String virtualNodeKey =  i + ":" + j;
                 long hash = getHash(virtualNodeKey);
 
@@ -56,15 +60,25 @@ public class ConsistentHashAlgorithm {
 
     public static void main(String[] args) {
         List<String> orderList = new ArrayList<>();
-        String order = "order_";
-        for (int i = 0; i < 63; i++) {
+        String order = "idcard_info_";
+        for (int i = 0; i <= 63; i++) {
             orderList.add(order + i);
         }
         SortedMap<Long, String> longStringSortedMap = initNodesToHashLoop(orderList);
         virtualNodes = longStringSortedMap;
-        String tableNode = getTableNode("2110253699108626517");
-        System.out.println(tableNode);
 
+        /*String tableNode = getTableNode("cdfc419a574a0e2e0471a6e78524ad85feca20508116d29eb48607a19f4a32be");
+        System.out.println(tableNode);*/
+        try{
+            String uid = "";
+            String[] split = uid.split(",");
+            for (int i = 0; i < 1000; i++) {
+                String tableNode = getTableNode("cdfc419a574a0e2e0471a6e78524ad85feca20508116d29eb48607a19f4a32be" + i);
+                System.out.println("cdfc419a574a0e2e0471a6e78524ad85feca20508116d29eb48607a19f4a32be" + i + ":" + tableNode);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
