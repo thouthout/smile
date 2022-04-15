@@ -51,6 +51,25 @@ public class NodeSum {
         return head;
     }
 
+    /**
+     * 判断是否有环
+      * @param head
+     * @return
+     */
+    public boolean ringLinkedList(ListNode head){
 
-    public void
+        if (Objects.isNull(head)){
+            return false;
+        }
+
+        ListNode curr = head, pre = head;
+        while(curr != null && curr.next != null){
+            curr = curr = curr.next;
+            head = pre.next = pre.next.next;
+            if (curr == head){
+                return true;
+            }
+        }
+        return false;
+    }
 }
