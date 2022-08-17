@@ -1,8 +1,10 @@
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @className: str
- * @description: TODO
+ * @description: 不重复的最长子串
  * @author: luweiming
  * @date: 2022/3/14
  **/
@@ -30,7 +32,52 @@ public class str {
     }
 
   public static void main(String[] args) {
-      int abcabcd = lengthOfLongestSubstring("abcabcd");
+      int abcabcd = longestStr("abcabcdefgabcd");
         System.out.println(abcabcd);
   }
+
+
+  public static Integer longestStr(String str){
+        Integer max = 0;
+        if (null == str || "".equals(str)){
+            return max;
+        }
+
+        Set<Character> window = new HashSet<>();
+
+        for (int i = 0, j=0; i < str.length(); i++) {
+            char curr = str.charAt(i);
+
+            boolean add = window.add(curr);
+            while (!add) {
+                window.remove(str.charAt(j));
+                j++;
+                add = window.add(curr);
+            }
+            max = Math.max(max, i-j+1);
+        }
+
+        return max;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

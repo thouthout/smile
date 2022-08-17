@@ -409,10 +409,10 @@ public class Dom {
         return ans;
     }
 
-      public static void main(String[] args) {
-          lengthOfLongestSubstring("abcabcbb");
-
-      }
+      /*public static void main(String[] args) {
+          int  abcabcbb= lengthOfLongestSubstring("abcabcbb");
+            System.out.println(abcabcbb);
+      }*/
 
   /**
    * 给定一个不含重复数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。
@@ -509,4 +509,41 @@ public class Dom {
 
             return len == Integer.MAX_VALUE ? "" : s.substring(start, start + len);
         }
+
+      public static Node main(Node head, int n) {
+            Node dum = new Node(0, head);
+            Node fast = head, slow = dum;
+            for (int i = 0; i < n; i++){
+                fast = fast.next;
+            }
+            while (fast != null) {
+                fast = fast.next;
+                slow = slow.next;
+            }
+
+            slow.next = slow.next.next;
+
+            return dum.next;
+      }
+
+      public static Node reverseNode(Node head){
+           Node prev = null;
+           while (head != null){
+               Node tempNext = head.next;
+               head.next = prev;
+               prev = head;
+               head = tempNext;
+           }
+           return prev;
+      }
+
+      public static void main(String[] args) {
+          Node node1 = new Node(1);
+          Node node2 = new Node(2, node1);
+          Node node3 = new Node(3, node2);
+          Node node4 = new Node(4, node3);
+          Node node5 = new Node(5, node4);
+          Node main = reverseNode(node5);
+        System.out.println(main);
+      }
 }

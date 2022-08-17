@@ -1,5 +1,9 @@
 package dp;
 
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalAdjusters;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -136,4 +140,13 @@ public class LRUCache {
         int oldKey = oldNode.key;
         map.remove(oldKey);
     }
+
+  public static void main(String[] args) {
+      LocalDateTime now = LocalDateTime.now();
+      DayOfWeek dayOfWeek = now.getDayOfWeek();
+
+      LocalDateTime monday = now.with(TemporalAdjusters.previous(DayOfWeek.SUNDAY)).plusDays(1).withHour(0).withMinute(0).withSecond(0);
+      LocalDateTime sunday = now.with(TemporalAdjusters.next(DayOfWeek.MONDAY)).minusDays(1).withHour(23).withMinute(59).withSecond(59);
+
+  }
 }

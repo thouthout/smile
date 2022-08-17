@@ -32,4 +32,36 @@ public class LongestPalindrome {
 
         return s.substring(start,start+maxlen);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
