@@ -50,6 +50,9 @@ public class Dom {
         int start = 0;
         for (int i = 0; i < length; i++) {
             for (int j = 0; j <= i; j++) {
+                if (i - j + 1 <= maxLen){
+                    break;
+                }
                 if (i - j < 2) {
                     // 子字符串长度小于 2 的时候单独处理
                     lps[j][i] = chars[i] == chars[j];
@@ -188,8 +191,8 @@ public class Dom {
         char[] arrayStr = str.toCharArray();
         //存储历史结果
         Boolean[][] history = new Boolean[][]{};
-        Integer maxLen = 1;
-        Integer start = 0;
+        int maxLen = 1;
+        int start = 0;
 
         for(int i = 0; i < arrayStr.length; i++) {
             for(int j = 0; j < i; j++) {
@@ -537,13 +540,114 @@ public class Dom {
            return prev;
       }
 
-      public static void main(String[] args) {
+      /*public static void main(String[] args) {
           Node node1 = new Node(1);
           Node node2 = new Node(2, node1);
           Node node3 = new Node(3, node2);
           Node node4 = new Node(4, node3);
           Node node5 = new Node(5, node4);
-          Node main = reverseNode(node5);
-        System.out.println(main);
-      }
+          //Node main = reverseNode(node5);
+        //System.out.println(main);
+
+          System.out.println(maxProfit(new int[]{2,10, 1, 5, 3, 6, 4}));
+      }*/
+
+    public static int maxProfit(int[] prices) {
+
+        int minprice = Integer.MAX_VALUE;
+        int maxprofit = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minprice) {
+                minprice = prices[i];
+            } else if (prices[i] - minprice > maxprofit) {
+                maxprofit = prices[i] - minprice;
+            }
+        }
+        return maxprofit;
+
+    }
+
+
+    /**
+     *
+     * int res=x^y;//x与y进行异或运算
+     *         int count=0;//设置位数
+     *         while(res!=0){
+     *             if((res & 1) == 1){ //res与1进行逻辑与运算 每次最低位与1进行运算
+     *                 count++;
+     *             }
+     *             res= res >> 1;
+     *         }
+     *         return count;
+     * 两个整数之间的 汉明距离 指的是这两个数字对应二进制位不同的位置的数目。
+     *
+     * 给你两个整数 x 和 y，计算并返回它们之间的汉明距离。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：x = 1, y = 4
+     * 输出：2
+     * 解释：
+     * 1   (0 0 0 1)
+     * 4   (0 1 0 0)
+     *        ↑   ↑
+     * 上面的箭头指出了对应二进制位不同的位置。
+     * 示例 2：
+     *
+     * 输入：x = 3, y = 1
+     * 输出：1
+     */
+
+    /*public static void main(String[] args) {
+        hammingDistance(1, 4);
+    }*/
+
+    public static int hammingDistance(int x, int y) {
+        int mid = x ^ y;
+
+        int res = 0;
+
+        while(mid > 0){
+            if ((mid & 1) == 1){
+                res ++;
+            }
+            mid = mid << 1;
+        }
+
+        return res;
+    }
+
+
+    /**
+     * 给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过也可能不穿过根结点。
+     *
+     *
+     *
+     * 示例 :
+     * 给定二叉树
+     *
+     *           1
+     *          / \
+     *         2   3
+     *        / \
+     *       4   5
+     * 返回 3, 它的长度是路径 [4,2,1,3] 或者 [5,2,1,3]。
+     *
+     *
+     *
+     * 注意：两结点之间的路径长度是以它们之间边的数目表示。
+     */
+
+
+
+
+
+
+
+
+
+
+
 }

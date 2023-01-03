@@ -14,10 +14,10 @@ public class LongestPalindrome {
             return s;
         }
 
-        int n = s.length(), start = 0, maxlen = 1;
+        int start = 0, maxlen = 1;
 
-        for(int i =0;i<n;i++){
-            for(int j =i+1;j<n;j++){
+        for(int i =0;i<s.length();i++){
+            for(int j =i+1;j<s.length();j++){
                 int temp1 = i,temp2 = j;
                 while(temp1 <temp2 && s.charAt(temp1) == s.charAt(temp2)){
                     temp1++; temp2--;

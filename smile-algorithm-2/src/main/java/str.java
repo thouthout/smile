@@ -11,7 +11,7 @@ import java.util.Set;
 public class str {
 
     public static int lengthOfLongestSubstring(String s) {
-
+        //key 字符 value次数  类似滑动窗口，用map承载存储
         HashMap<Character,Integer> hashMap=new HashMap<> ();
         int res=0;
 
