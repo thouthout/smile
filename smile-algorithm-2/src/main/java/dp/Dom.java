@@ -2,6 +2,7 @@ package dp;
 
 import curry.Node;
 
+import javax.swing.tree.TreeNode;
 import java.util.*;
 
 /**
@@ -647,7 +648,186 @@ public class Dom {
 
 
 
+    static class TreeNode {
+        TreeNode left;
+        TreeNode right;
+        int val;
+    }
+
+    static int ans = 1;
+
+    public int dept(TreeNode root){
+
+        if (root == null){
+            return 0;
+        }
+        int deptLeft = dept(root.left);
+        int deptRight = dept(root.right);
+
+        ans = Math.max(ans, deptLeft + deptRight + 1);
+
+        return Math.max(deptLeft , deptRight) + 1;
+    }
+
+    public int diameterOfBinaryTree(TreeNode root) {
+        dept(root);
+        return  ans - 1;
+    }
 
 
 
+
+
+    public TreeNode mergeTrees(TreeNode root1, TreeNode root2){
+
+        if (root1 == null || root2 == null){
+            return root1 == null ? root2 : root1;
+        }
+
+        root1.val += root2.val;
+
+        root1.left = mergeTrees(root1.left, root2.left);
+        root1.right = mergeTrees(root1.right, root2.right);
+
+        return root1;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * 给你两棵二叉树： root1 和 root2 。
+     *
+     * 想象一下，当你将其中一棵覆盖到另一棵之上时，两棵树上的一些节点将会重叠（而另一些不会）。你需要将这两棵树合并成一棵新二叉树。合并的规则是：如果两个节点重叠，那么将这两个节点的值相加作为合并后节点的新值；否则，不为 null 的节点将直接作为新二叉树的节点。
+     *
+     * 返回合并后的二叉树。
+     *
+     * 注意: 合并过程必须从两个树的根节点开始。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     *
+     * 输入：root1 = [1,3,2,5], root2 = [2,1,3,null,4,null,7]
+     * 输出：[3,4,5,5,4,null,7]
+     * 示例 2：
+     *
+     * 输入：root1 = [1], root2 = [1,2]
+     * 输出：[2,2]
+     */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static void quickSort(int[] arr,int low,int high) {
+        int p,i,j,temp;
+
+        if(low >= high) {
+            return;
+        }
+        //p就是基准数,这里就是每个数组的第一个
+        p = arr[low];
+        i = low;
+        j = high;
+        while(i < j) {
+            //右边当发现小于p的值时停止循环
+            while(arr[j] >= p && i < j) {
+                j--;
+            }
+
+            //这里一定是右边开始，上下这两个循环不能调换（下面有解析，可以先想想）
+
+            //左边当发现大于p的值时停止循环
+            while(arr[i] <= p && i < j) {
+                i++;
+            }
+
+            temp = arr[j];
+            arr[j] = arr[i];
+            arr[i] = temp;
+        }
+        arr[low] = arr[i];//这里的arr[i]一定是停小于p的，经过i、j交换后i处的值一定是小于p的(j先走)
+        arr[i] = p;
+        quickSort(arr,low,j-1);  //对左边快排
+        quickSort(arr,j+1,high); //对右边快排
+
+    }
+
+
+    /**
+     * 将一个给定字符串 s 根据给定的行数 numRows ，以从上往下、从左到右进行 Z 字形排列。
+     *
+     * 比如输入字符串为 "PAYPALISHIRING" 行数为 3 时，排列如下：
+     *
+     * P   A   H   N
+     * A P L S I I G
+     * Y   I   R
+     * 之后，你的输出需要从左往右逐行读取，产生出一个新的字符串，比如："PAHNAPLSIIGYIR"。
+     *
+     * 请你实现这个将字符串进行指定行数变换的函数：
+     *
+     * string convert(string s, int numRows);
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：s = "PAYPALISHIRING", numRows = 3
+     * 输出："PAHNAPLSIIGYIR"
+     * 示例 2：
+     * 输入：s = "PAYPALISHIRING", numRows = 4
+     * 输出："PINALSIGYAHRPI"
+     * 解释：
+     * P     I    N
+     * A   L S  I G
+     * Y A   H R
+     * P     I
+     */
+
+
+
+
+    public String convert(String s, int numRows) {
+        if(numRows < 2) return s;
+        List<StringBuilder> rows = new ArrayList<StringBuilder>();
+        for(int i = 0; i < numRows; i++) rows.add(new StringBuilder());
+        int i = 0, flag = -1;
+        for(char c : s.toCharArray()) {
+            rows.get(i).append(c);
+            if(i == 0 || i == numRows -1) flag = - flag;
+            i += flag;
+        }
+        StringBuilder res = new StringBuilder();
+        for(StringBuilder row : rows) res.append(row);
+        return res.toString();
+    }
 }
+
+
+
+
+
+

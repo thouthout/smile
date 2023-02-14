@@ -3,8 +3,8 @@ package day0923;
 
 import org.w3c.dom.css.CSSRuleList;
 
-import java.util.Objects;
-import java.util.Stack;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @className: Main5
@@ -388,14 +388,6 @@ public ListNode deleteTarget(ListNode head, Integer n){
 
 
 
-
-
-
-
-
-
-
-
     public int strStr(String haystack, String needle) {
 
 
@@ -406,4 +398,107 @@ public ListNode deleteTarget(ListNode head, Integer n){
 
 
 
+
+
+
+
+}
+
+
+class Solution {
+    // KMP 算法
+    // ss: 原串(string)  pp: 匹配串(pattern)
+    public int strStr(String ss, String pp) {
+        if (pp.isEmpty()) return 0;
+
+        // 分别读取原串和匹配串的长度
+        int n = ss.length(), m = pp.length();
+        // 原串和匹配串前面都加空格，使其下标从 1 开始
+        ss = " " + ss;
+        pp = " " + pp;
+
+        char[] s = ss.toCharArray();
+        char[] p = pp.toCharArray();
+
+        // 构建 next 数组，数组长度为匹配串的长度（next 数组是和匹配串相关的）
+        int[] next = new int[m + 1];
+        // 构造过程 i = 2，j = 0 开始，i 小于等于匹配串长度 【构造 i 从 2 开始】
+        for (int i = 2, j = 0; i <= m; i++) {
+            // 匹配不成功的话，j = next(j)
+            while (j > 0 && p[i] != p[j + 1]) j = next[j];
+            // 匹配成功的话，先让 j++
+            if (p[i] == p[j + 1]) j++;
+            // 更新 next[i]，结束本次循环，i++
+            next[i] = j;
+        }
+
+        // 匹配过程，i = 1，j = 0 开始，i 小于等于原串长度 【匹配 i 从 1 开始】
+        for (int i = 1, j = 0; i <= n; i++) {
+            // 匹配不成功 j = next(j)
+            while (j > 0 && s[i] != p[j + 1]) j = next[j];
+            // 匹配成功的话，先让 j++，结束本次循环后 i++
+            if (s[i] == p[j + 1]) j++;
+            // 整一段匹配成功，直接返回下标
+            if (j == m) return i - m;
+        }
+
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        int test = test("adss3+5");
+        System.out.println(test);
+    }
+
+
+
+    public static int test(String str){
+
+        Character[] chars = {'1','2','3','4','5','6','7','8','9','+','-','*','/'};
+        List<Character> collect = Arrays.stream(chars).collect(Collectors.toList());
+
+        String resStr = "";
+        for (int i = 0; i < str.length(); i++) {
+            if(collect.contains(str.charAt(i))){
+                resStr = resStr + str.charAt(i);
+            }
+        }
+
+        char[] ch = resStr.toCharArray();
+        Stack<Integer> stack = new Stack<>();//存放每个小表达式计算的结果
+        int num = 0;
+        char preSign = '+';
+        for(int i = 0; i < resStr.length(); i++){
+            //如果当前遍历的字符是数字，更新num，注意要获取完整的数字
+            if(ch[i] >= 48 && ch[i] <= 57){
+                num = num * 10 + ch[i] - '0';
+            }
+            //如果不是数字也不是空格 或 已遍历到字符串的末尾，需要根据preSign得到相应结果
+            if(!Character.isDigit(ch[i]) && ch[i] != ' ' || i == resStr.length() - 1){
+                switch(preSign){
+                    case '+':
+                        stack.push(num);
+                        break;
+                    case '-':
+                        stack.push(-num);
+                        break;
+                    case '*':
+                        stack.push(stack.pop() * num);
+                        break;
+                    case '/':
+                        stack.push(stack.pop() / num);
+                        break;
+                }
+                num = 0;
+                preSign = ch[i];
+            }
+
+        }
+        int res = 0;
+        while(!stack.isEmpty()){
+            res += stack.pop();
+        }
+        return res;
+
+    }
 }

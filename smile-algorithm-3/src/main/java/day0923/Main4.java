@@ -51,4 +51,20 @@ package day0923;
  * 解释: M = 1000, CM = 900, XC = 90, IV = 4.
  **/
 public class Main4 {
+
+
+    public void lastZero(int[] nums){
+
+        int feelZero = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0){
+                nums[feelZero] = nums[i];
+                feelZero ++;
+            }
+        }
+        for (int i = feelZero; i < nums.length; i++) {
+            nums[i] = 0;
+        }
+    }
+
 }
